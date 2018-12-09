@@ -1,0 +1,27 @@
+location ^~  /api/v1.0 {
+    location ^~ /api/v1.0/user {
+ 	proxy_pass http://umbrella-user;
+    }
+}
+
+location ^~ /internal/api/v1.0 {
+    location ^~ /internal/api/v1.0/user {
+        proxy_pass http://umbrella-user;
+    }
+}
+
+location ^~ /user {
+    proxy_pass http://umbrella-web;
+}
+
+location ~ .*\.(js|css|png|jpg|gif)$ {
+    proxy_pass http://umbrella-web;
+}
+
+location ^~ /static {
+    proxy_pass http://umbrella-web;
+}
+
+#location ^~ /app {
+#    proxy_pass http://umbrella-web;
+#}
